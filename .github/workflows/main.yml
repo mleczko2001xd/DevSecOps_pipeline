@@ -15,7 +15,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      # 2. SAST (Static Application Security Testing) - Semgrep
+      # 2. SAST (Static Application Security Testing) - SonarQUbe
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
         env:
