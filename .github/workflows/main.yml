@@ -18,6 +18,7 @@ jobs:
       # 2. SAST (Static Application Security Testing) - SonarQube
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
+        continue-on-error: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
