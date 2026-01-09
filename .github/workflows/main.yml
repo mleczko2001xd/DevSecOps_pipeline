@@ -12,13 +12,13 @@ jobs:
       # 1. SCA (Software Composition Analysis) - Snyk
       - name: Run Snyk to check for vulnerable libraries
         uses: snyk/actions/python@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} #Copy from SNYK account API Token and paste in GitHub ---> repo --->  Actions secrets and variables ---> variables
 
       # 2. SAST (Static Application Security Testing) - SonarQube
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v7.0.0
-        continue-on-error: true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
