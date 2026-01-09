@@ -1,0 +1,38 @@
+name: Full App Sec Pipeline
+on: [push]
+
+jobs:
+  security-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v5
+
+      # 1. SCA (Software Composition Analysis) - Snyk
+      - name: Run Snyk to check for vulnerable libraries
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # 2. SAST (Static Application Security Testing) - Semgrep
+      - name: Run Semgrep to find bugs in code
+        uses: returntocrop/semgrep-action@v1
+        with:
+          config: p/security/audit
+
+      # 3. Build & Container Scan - Trivy
+      - name: Build Docker Image
+        run: docker build -t my-app:${{ github.sha }} .
+
+      - name: Scan Image with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image: my-app:${{ github.sha }}
+          severity: CRITICAL,HIGH
+
+      # 4. DAST (Dynamic Application Security Testing)
+      # Placeholder: Replace with your preferred DAST tool, e.g., OWASP ZAP or Arachni
+      - name: Run DAST scan
+        run: |
+          echo "DAST scanning step - implement your tool here"
