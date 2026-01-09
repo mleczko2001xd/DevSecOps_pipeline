@@ -16,10 +16,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       # 2. SAST (Static Application Security Testing) - Semgrep
-      - name: Run Semgrep to find bugs in code
-        uses: returntocrop/semgrep-action@v1
-        with:
-          config: p/security/audit
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       # 3. Build & Container Scan - Trivy
       - name: Build Docker Image
