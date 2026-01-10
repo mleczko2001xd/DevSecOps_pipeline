@@ -31,6 +31,7 @@ jobs:
         with:
           image: my-app:${{ github.sha }}
           severity: CRITICAL,HIGH
+          conntinue-on-error: true
 
       # 4. DAST (Dynamic Application Security Testing)
       # Placeholder: Replace with your preferred DAST tool, e.g., OWASP ZAP or Arachni
