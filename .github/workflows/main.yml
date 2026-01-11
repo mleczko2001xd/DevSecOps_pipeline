@@ -27,7 +27,7 @@ jobs:
 
       # 3. Build & Container Scan - Trivy TODO (add monitor)
       - name: Build Docker Image
-        run: docker build -t my-app:${{ github.sha }} .
+        run: docker build --network="host" -t my-app:${{ github.sha }} .
 
       - name: Scan Image with Trivy
         uses: aquasecurity/trivy-action@master
