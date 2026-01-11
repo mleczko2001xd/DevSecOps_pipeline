@@ -33,10 +33,10 @@ jobs:
           severity: CRITICAL,HIGH
           scanners: vuln #PIPETEST
 
-      # 4. DAST (Dynamic Application Security Testing) - ZAP
+      # 4. DAST (Dynamic Application Security Testing) - OWASP ZAP
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
-          target: my-app:${{ github.sha }}
+          target: 'http://localhost:8080'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
