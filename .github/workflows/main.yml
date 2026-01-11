@@ -16,8 +16,6 @@ jobs:
         run: |
           snyk auth ${{ secrets.SNYK_TOKEN }}
           snyk monitor --org=mleczko2001xd --project-name=DevSecOps_pipeline
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} #Copy from SNYK account API Token and paste in GitHub ---> repo --->  Actions secrets and variables ---> variables
 
       # 2. SAST (Static Application Security Testing) - SonarQube
       - name: SonarQube Scan
