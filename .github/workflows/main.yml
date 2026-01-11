@@ -1,4 +1,4 @@
-name: Full App Sec Pipeline
+name: Full App Sec Pipeline #TODO: add monitors (ZAP,TRIVY) add results in test (SONAR) in pipeline if not all gives results good idea to generate files nad read in one place 
 on: [push]
 
 jobs:
