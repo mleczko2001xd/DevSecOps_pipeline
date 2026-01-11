@@ -25,14 +25,13 @@ jobs:
       # 3. Build & Container Scan - Trivy
       - name: Build Docker Image
         run: docker build -t my-app:${{ github.sha }} .
-        sleep: 10
 
       - name: Scan Image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
           image: my-app:${{ github.sha }}
           severity: CRITICAL,HIGH
-          scanners: vuln
+          scanners: vuln #123
 
       # 4. DAST (Dynamic Application Security Testing)
       # Placeholder: Replace with your preferred DAST tool, e.g., OWASP ZAP or Arachni
