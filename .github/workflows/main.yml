@@ -34,7 +34,7 @@ jobs:
         with:
           image-ref: my-app:${{ github.sha }}
           severity: CRITICAL,HIGH
-          scanners: vuln 
+          scanners: vuln # You can add to with skip-dirs: '' if needed
 
       # 4. DAST (Dynamic Application Security Testing) - OWASP ZAP 
       - name: OWASP ZAP Baseline Scan
