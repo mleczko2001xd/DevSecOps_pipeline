@@ -33,7 +33,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: my-app:${{ github.sha }}
-          severity: CRITICAL,HIGH #If needed you can addexit-code: '1' to return error in pipeline if want to avoid pr
+          severity: CRITICAL,HIGH #If needed you can addexit-code: '1' to return error if want to stop pipeline
           scanners: vuln # You can add to with skip-dirs: ''
 
       # 4. DAST (Dynamic Application Security Testing) - OWASP ZAP 
