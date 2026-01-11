@@ -33,8 +33,10 @@ jobs:
           severity: CRITICAL,HIGH
           scanners: vuln #PIPETEST
 
-      # 4. DAST (Dynamic Application Security Testing)
-      # Placeholder: Replace with your preferred DAST tool, e.g., OWASP ZAP or Arachni
-      - name: Run DAST scan
-        run: |
-          echo "DAST scanning step - implement your tool here"
+      # 4. DAST (Dynamic Application Security Testing) - ZAP
+      - name: OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: my-app:${{ github.sha }}
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'
