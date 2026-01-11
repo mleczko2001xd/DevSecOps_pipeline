@@ -29,9 +29,9 @@ jobs:
       - name: Scan Image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image: my-app:${{ github.sha }}
+          image-ref: my-app:${{ github.sha }}
           severity: CRITICAL,HIGH
-          scanners: vuln #123
+          scanners: vuln #PIPETEST
 
       # 4. DAST (Dynamic Application Security Testing)
       # Placeholder: Replace with your preferred DAST tool, e.g., OWASP ZAP or Arachni
