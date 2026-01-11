@@ -41,10 +41,18 @@ jobs:
         run: |
           docker run -d -p 5000:5000 --name test-app my-app:${{ github.sha }}
           timeout 60s bash -c 'until curl -s localhost:5000; do sleep 5; done'
-
+     # PLACE THE DEBUG STEP HERE:
+      - name: Debug Application Failure
+        if: failure()  # This ensures the step runs only if the timeout above occurs
+        run: |
+          echo "Checking container status..."
+          docker ps -a
+          echo "Displaying application logs (This will show the Python error):"
+          docker logs test-app
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
           target: 'http://localhost:5000'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
+          
