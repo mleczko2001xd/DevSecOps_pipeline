@@ -33,10 +33,15 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: my-app:${{ github.sha }}
-          severity: CRITICAL,HIGH
-          scanners: vuln # You can add to with skip-dirs: '' if needed
+          severity: CRITICAL,HIGH #If needed you can addexit-code: '1' to return error in pipeline if want to avoid pr
+          scanners: vuln # You can add to with skip-dirs: ''
 
       # 4. DAST (Dynamic Application Security Testing) - OWASP ZAP 
+      - name: Start application for DAST
+        run: |
+          docker -d -p 5000:5000 --name my-app:${{ github.sha }} .
+           timeout 60s bash -c 'until curl -s localhost:5000; do sleep 5; done'
+
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
